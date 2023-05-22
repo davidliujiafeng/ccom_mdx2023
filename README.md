@@ -40,7 +40,33 @@ elif args.optim.loss == 'l1_trunc':
 
 The hyper-parameter `args.optim.trunc_ratio` is the quantile of loss in a batch.
 
-#### training steps
+#### training steps and results
 
-All the following 3 steps uses loss truncation but with different `args.optim.trunc_ratio` and learning rates. All training steps use label noise dataset only. We did not use any external data/model or any human labeling. 
-* Step 1: training from scratch 
+All the following 3 steps uses loss truncation but with different `args.optim.trunc_ratio` and learning rates. All training steps use **label-noise dataset only**. We did not use any external data/model or any human labeling in our entire training/validation process. 
+* step 1: $C=0.7$, bsz=4, drop 1 out of 4, lr=3e-4, 500 epoch joint training
+* step 2: $C=0.5$, bsz=4, drop 2 out of 4, lr=1e-4, 200 epoch joint training
+* step 3: $C=0.3$, bsz=4, drop 3 out of 4, lr=1e-4, 200 epoch joint training
+
+$C$ is the truncation ratio. We use 8 NVIDIA A100 cards for the training, hyper-parameters of the model is identical to HTDEMUCS's default parameters (except for loss truncation and the learning rate). Joint training means 4 stems are predicted and trained at the same time. There can be at most 4 samples loaded in one card. So setting $C=0.7$ will drop 1 out 4 samples on the batch, and $C=0.5$ means 2 out of 4, etc.
+
+We find that although we train the model by loss truncation from scratch using the label-noise data only, it can still achieve convergence and a competitive SDR score. After step 3, the model achieves the following SDR on Leaderboard A. There are no baseline results for Phase 2, so we use results from Phase 1 for a rough comparison.
+
+| model | Bass | Drum | Other | Vocals | Mean |
+| --------- | --- | --- | --- | --- | --- |
+| Baseline (DEMUCS, Phase 1) | 5.067 | 5.759 | 3.140 | 5.851 | 4.954|
+| Baseline (MDX-Net, Phase 1) | 4.497 | 2.976 | 2.794| 4.870 | 3.784|
+| Baseline (UMX, Phase 1) | 3.537 | 3.587 | 2.343 | 4.626 | 3.523|
+| Ours (loss trunc., Phase 2) | 6.943 | 6.624 | 4.447 | 7.094| 6.277|
+
+#### reproducing our results
+
+* Pull the training code from [DEMUCS](https://github.com/facebookresearch/demucs). Unzip the label-noise dataset into `./demucs/dataset/label_noise/train/` 
+* Comment the valid track code in `./demucs/demucs/wav.py`
+```
+def get_musdb_wav_datasets(args):
+    ...
+    # valid_tracks = _get_musdb_valid()
+    valid_tracks = []
+    ...
+```
+* Positional encoding
