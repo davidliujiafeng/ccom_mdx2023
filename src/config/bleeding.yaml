@@ -1,0 +1,13 @@
+root_dir: "/root/autodl-tmp/datasets/moisesdb23_bleeding_v1.0"
+meta_dir: "./metadata"
+meta_train: "bleeding_train.json"
+length: 5
+sampler_rate: 44100
+shift: 44100
+seg_len: 346841
+
+batch_size: 4
+num_workers: 32
+
+optim:
+  lr: 3e-4
