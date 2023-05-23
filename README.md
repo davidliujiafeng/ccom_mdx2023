@@ -6,7 +6,7 @@ The training of our final model on leaderboard A has two consecutive parts. Part
 
 ### Mechanism of loss truncation
 
-The idea comes from the paper "Improved Natural Language Generation via Loss Truncation (ACL 2020)" by Kang et., al. [repo](https://github.com/ddkang/loss_dropper), [paper](https://aclanthology.org/2020.acl-main.66.pdf).
+The idea comes from the paper "Improved Natural Language Generation via Loss Truncation (ACL 2020)" by Kang et al. [repo](https://github.com/ddkang/loss_dropper), [paper](https://aclanthology.org/2020.acl-main.66.pdf).
 
 Suppose an oracle model that **perfectly** separate each stems with SDR= $+\infty$:
 * True label samples will have loss = 0
