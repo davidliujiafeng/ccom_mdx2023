@@ -39,7 +39,7 @@ def change_pitch_tempo(file_path, start_idx=0, seg_len=50000000,
 
         # Set Command
         command = [
-            "rubberband-r3",
+            "../rubberband-r3",
             f"--pitch {delta_pitch}",
             f"--tempo {delta_tempo:.6f}",
             f"--fast",
