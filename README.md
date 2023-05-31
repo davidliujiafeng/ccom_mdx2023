@@ -4,7 +4,7 @@ This is the repository of team CCOM for Sound Demixing Challenge 2023. For Music
 
 ## Requirements
 
-- For inference, see `apt.txt` and `requirement.txt` in the `labelnoise_submission` branch.
+- For inference and bleeding training, see `apt.txt` and `requirement.txt` in the `labelnoise_submission` branch.
 - For labelnoise training, you need to clone [DEMUCS](https://github.com/facebookresearch/demucs) and install all its dependencies, with also packages in `apt.txt` and `requirement.txt` needed.
 
 ## Methods
