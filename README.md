@@ -9,7 +9,7 @@ This is the repository of team CCOM for Sound Demixing Challenge 2023. For Music
 
 ## Methods
 - For Leaderboard A, we used loss truncation in pre-training phase and then we filtered the dataset automatically with the pretrained loss truncation model. For further details please see `README.md` in the `labelnoise_train` branch.
-- For Leaderboard B, we designed a multi-spectrogram U-Net model. Detailed are shown in he `bleeding_train` branch.
+- For Leaderboard B, we designed a multi-spectrogram U-Net model. Details are shown in he `bleeding_train` branch.
 
 ## Results
 ### Leaderboard A
