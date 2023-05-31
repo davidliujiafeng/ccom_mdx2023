@@ -22,7 +22,7 @@ To filter out noisy labels, sort the loss value in descending order in a batch o
 
 ### Core code
 
-In practice, we are not allowed to use any oracle / external model. So we heuristically apply the loss truncation function directly from the very beginning of training. We use the training architecture of [DEMUCS](https://github.com/facebookresearch/demucs), in which we simply re-write the loss function part:
+In practice, we are not allowed to use any oracle / external model. So we heuristically apply the loss truncation function directly from the very beginning of training. We use the training architecture of [DEMUCS](https://github.com/facebookresearch/demucs), in which we simply re-write the loss function part in `./demucs/demucs/solver.py` (line 324):
 
 ```
 if args.optim.loss == 'l1':
@@ -72,6 +72,11 @@ We find that although we train the model by loss truncation from scratch using t
 * Unzip the label-noise dataset into `./demucs/dataset/label_noise/train/`. The dir looks like this:
 ```
 demucs
+|-+conf
+|---+variant
+|-----step1.yaml
+|-----step2.yaml
+|-----step3.yaml
 |-+dataset
 |---+label_noise
 |-----+train
